@@ -1,7 +1,7 @@
 ##  Project Overview
 This project simulates a real-world **bank regulatory reporting system** that was developed to eliminate manual work and ensure 100% compliance for quarterly submissions to financial authorities. It mirrors the architecture and business logic of a production system used in a risk management environment. 
 
-The pipeline follows a modular, production-ready design:<br>
+Locally the pipeline follows a modular, production-ready design:<br>
 CSV Data Source → Python Data Processing → XML Generation → XSD Validation → Report Delivery
 
 Please note:<br>
