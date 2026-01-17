@@ -1,0 +1,5 @@
+bank_id,bank_name,report_date,reporting_period_start,reporting_period_end,currency,report_type,contact_email,contact_name
+US-BANK-12345,Global Commercial Bank,2024-12-31,2024-10-01,2024-12-31,USD,QUARTERLY,reports@gcbank.com,John Smith
+US-BANK-67890,Regional Trust Bank,2024-12-31,2024-10-01,2024-12-31,USD,QUARTERLY,compliance@rtbank.com,Sarah Johnson
+US-BANK-24680,Metropolitan Bank,2024-12-31,2024-10-01,2024-12-31,EUR,QUARTERLY,regulatory@metro.com,Robert Chen
+US-BANK-13579,Pacific National Bank,2024-12-31,2024-10-01,2024-12-31,USD,QUARTERLY,risk@pacific.com,Maria Garcia

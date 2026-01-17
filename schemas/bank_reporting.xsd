@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <xs:element name="BankRegulatoryReport">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ReportHeader" type="HeaderType"/>
+                <xs:element name="CapitalAdequacy" type="CapitalType"/>
+                <xs:element name="LiquidityMetrics" type="LiquidityType"/>
+                <xs:element name="CreditExposures" type="CreditExposureType"/>
+            </xs:sequence>
+            <xs:attribute name="reportDate" type="xs:date" use="required"/>
+            <xs:attribute name="bankId" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="HeaderType">
+        <xs:sequence>
+            <xs:element name="BankName" type="xs:string"/>
+            <xs:element name="ReportingPeriod">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="StartDate" type="xs:date"/>
+                        <xs:element name="EndDate" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Currency" type="xs:string" default="USD"/>
+            <xs:element name="ReportType" type="ReportTypeEnum"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CapitalType">
+        <xs:sequence>
+            <xs:element name="Tier1Capital" type="MonetaryAmount"/>
+            <xs:element name="Tier2Capital" type="MonetaryAmount"/>
+            <xs:element name="TotalCapital" type="MonetaryAmount"/>
+            <xs:element name="RiskWeightedAssets" type="MonetaryAmount"/>
+            <xs:element name="CAR" type="PercentageType"/>
+            <xs:element name="MinimumRequirement" type="PercentageType" default="10.5"/>
+            <xs:element name="ComplianceStatus" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LiquidityType">
+        <xs:sequence>
+            <xs:element name="LCR">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Ratio" type="PercentageType"/>
+                        <xs:element name="HighQualityLiquidAssets" type="MonetaryAmount"/>
+                        <xs:element name="NetCashOutflows" type="MonetaryAmount"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NSFR" type="PercentageType"/>
+            <xs:element name="RegulatoryThresholds" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LCR_Minimum" type="PercentageType"/>
+                        <xs:element name="NSFR_Minimum" type="PercentageType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CreditExposureType">
+        <xs:sequence>
+            <xs:element name="TotalExposures" type="MonetaryAmount"/>
+            <xs:element name="PortfolioBreakdown">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Corporate" type="PortfolioType"/>
+                        <xs:element name="Retail" type="PortfolioType"/>
+                        <xs:element name="Sovereign" type="PortfolioType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PortfolioType">
+        <xs:sequence>
+            <xs:element name="ExposureAmount" type="MonetaryAmount"/>
+            <xs:element name="RiskWeight" type="PercentageType"/>
+            <xs:element name="ImpairedLoans" type="MonetaryAmount" minOccurs="0"/>
+            <xs:element name="ImpairmentRate" type="PercentageType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="MonetaryAmount">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PercentageType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="200"/>
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ReportTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="QUARTERLY"/>
+            <xs:enumeration value="ANNUAL"/>
+            <xs:enumeration value="ADHOC"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
