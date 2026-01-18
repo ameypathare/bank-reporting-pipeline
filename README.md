@@ -6,7 +6,7 @@ CSV Data Source → Python Data Processing → XML Generation → XSD Validation
 
 Please note:<br>
 <font color="red">
-The data ingested is fake. Due to organization's rules & regulations can't display the data & code used in production.
+The data ingested is a demo demonstrated. Due to organization's rules & regulations can't display the data & code used in production.
 </font>
 
 
